@@ -1,1 +1,182 @@
-começo
+#include<iostream>
+#include<vector>
+#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include<iomanip>
+#include<algorithm>
+
+
+using namespace std;
+
+int main(){
+
+
+
+    setlocale(LC_ALL, "Portuguese");
+
+    vector <int> numeros;
+    int jogoloteria;
+    int quantidadeAposta;
+    int num_apostas;
+    int quantia_dezenas;
+    double valor_aposta;
+
+    string tipodejogo;
+
+        cout << "  Qual jogo você deseja fazer?" <<endl;
+        cout << "-------------------------------" <<endl;
+        cout << "       Mega-Sena - Digite *1*" <<endl;
+        cout << "       Quina     - Digite *2*" <<endl;
+        cout << "       Lotomania - Digite *3*" <<endl;
+        cout << "       Lotofácil - Digite *4*" <<endl;
+        cout << "-------------------------------" <<endl <<endl;
+        cout << "Digite: ";
+
+        cin >> jogoloteria;
+
+        switch(jogoloteria){
+
+
+        case 1:
+            cout << fixed <<setprecision(2);
+            tipodejogo = "Mega-Sena";
+
+            cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+
+        do{
+            cout << "Quantas apostas você deseja fazer?" <<endl;
+            cin >> num_apostas;
+
+        }while(num_apostas <= 0);
+
+
+            do{
+            cout << "Quantas dezenas você deseja jogar? (mínimo 6 - máximo 15" <<endl;
+            cin >> quantia_dezenas;
+
+            }while(quantia_dezenas < 6 || quantia_dezenas >15);
+
+            if(quantia_dezenas == 6){
+                valor_aposta = 3.50  ;
+            }
+
+            else if(quantia_dezenas == 7){
+                valor_aposta = 24,50  ;
+            }
+
+            else if(quantia_dezenas == 8){
+                valor_aposta = 98,00  ;
+            }
+
+            else if(quantia_dezenas == 9){
+                valor_aposta =  294,00 ;
+            }
+
+            else if(quantia_dezenas == 10){
+                valor_aposta = 735,00  ;
+            }
+
+            else if(quantia_dezenas == 11){
+                valor_aposta = 1.617,00  ;
+            }
+
+            else if(quantia_dezenas == 12){
+                valor_aposta = 3.234,00  ;
+            }
+
+            else if(quantia_dezenas == 13){
+                valor_aposta = 6.006,00 ;
+            }
+
+            else if(quantia_dezenas == 14){
+                valor_aposta = 10.510,50  ;
+            }
+
+            if(quantia_dezenas == 15){
+                valor_aposta = 17.517,50  ;
+            }
+
+
+        for(int i = 1 ; i < num_apostas + 1 ; i++){
+                cout << "Sua " <<i <<"º aposta teve os seguintes números: " <<endl;
+
+            for(int j = 0 ; j < quantia_dezenas ; j++){
+                numeros.push_back(rand() % 60);
+            }
+                sort(numeros.begin(), numeros.end());
+                    for(int a = 0 ; a < quantia_dezenas ; a++){
+                        cout << numeros[a] << " " ;
+                }
+                    cout <<endl << "Foram gastos R$" << valor_aposta <<" com essa aposta" <<endl;
+                    numeros.clear();
+
+
+                cout <<endl;
+        }
+
+
+        break;
+
+
+
+        case 2:
+            tipodejogo = "Quina";
+                cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+
+        do{
+            cout << "Quantas apostas você deseja fazer?" <<endl;
+            cin >> num_apostas;
+
+        }while(num_apostas <= 0);
+
+
+        break;
+
+
+
+        case 3:
+            tipodejogo = "Lotomania";
+            cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+
+        do{
+            cout << "Quantas apostas você deseja fazer?" <<endl;
+            cin >> num_apostas;
+
+
+        }while(num_apostas <= 0);
+
+
+        break;
+
+
+
+        case 4:
+            tipodejogo = "Lotofácil";
+            cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+
+        do{
+            cout << "Quantas apostas você deseja fazer?" <<endl;
+            cin >> num_apostas;
+
+
+        }while(num_apostas <= 0);
+
+
+
+        break;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+return 0;
+}
