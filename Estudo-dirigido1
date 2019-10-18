@@ -22,6 +22,7 @@ int main(){
     int quantia_dezenas;
     double valor_aposta;
 
+
     string tipodejogo;
 
         cout << "  Qual jogo você deseja fazer?" <<endl;
@@ -105,9 +106,26 @@ int main(){
                 numeros.push_back(rand() % 60);
             }
                 sort(numeros.begin(), numeros.end());
-                    for(int a = 0 ; a < quantia_dezenas ; a++){
-                        cout << numeros[a] << " " ;
-                }
+
+                   for(int a = 0 ; a < quantia_dezenas ; a++){
+                          if(numeros[a] != numeros[a - 1]){
+                                cout << numeros[a] <<" ";
+                               }   else{
+                            verif:     numeros[a] = (rand() % 60);
+                                    sort(numeros.begin(), numeros.end());
+                                          if(numeros[a] != numeros[a - 1]){
+                                                 cout <<numeros[a] << " ";
+                                          } else{
+                                            goto verif;
+                                          }
+
+
+
+
+                    }
+                    }
+
+
                     cout <<endl << "Foram gastos R$" << valor_aposta <<" com essa aposta" <<endl;
                     numeros.clear();
 
@@ -167,6 +185,9 @@ int main(){
         break;
 
     }
+
+
+
 
 
 
