@@ -12,299 +12,313 @@ using namespace std;
 
 
    void gerador(int apostas, int dezenas, int quan_numeros){
-        vector <int> numeros;
-        srand(time( NULL));
-        int excluir;
 
 
-         for(int i = 1 ; i < apostas + 1 ; i++){
+        int det = quan_numeros;
+    	vector <int> numeros;
+    	int sorteado;
+    	bool esta_repetido = false;
 
-                cout <<endl;
-                cout << "===============================================" <<endl;
-                cout << "Sua " <<i <<"º aposta teve os seguintes números: " <<endl <<endl;
+    	srand(time( NULL));
+    	vector <int> tamanho;
 
-            for(int j = 0 ; j < dezenas ; j++){
-                numeros.push_back(rand() % quan_numeros + 1);
-            }
-                sort(numeros.begin(), numeros.end());
 
-            for(int a = 0 ; a < dezenas ; a++){
-          verif:       if (numeros[a] != numeros[a - 1]){
-                            cout << numeros[a] <<" ";
-                        }
-                           else{
-                                numeros[a] = 0;
-                            numeros.pop_back(rand() % quan_numeros + 1);
-                                    sort(numeros.begin(), numeros.end());
-                              if(numeros[a] != numeros[a - 1]){
-                                cout <<numeros[a] << " ";
-                            }else{
-                                goto verif;
-                             }
+    	for(int a = 0; a < det; a++ ){
+            tamanho[a] = a;
+    	}
 
-                        }
 
+
+     	for(int i = 1 ; i < apostas + 1 ; i++){
+
+        	cout <<endl;
+        	cout << "===============================================" <<endl;
+        	cout << "Sua " <<i <<"º aposta teve os seguintes números: " <<endl <<endl;
+
+        	while(numeros.size() < dezenas){
+
+            	sorteado = (rand() % quan_numeros + 1);
+
+            	for(int j = 0; j < numeros.size(); j++ ){
+
+                	if(sorteado == numeros[j]){
+                    	esta_repetido  = true;
                 }
 
-                   cout <<endl <<endl;
-                    numeros.clear();
-         }
-                cout<< "----------------------------------" <<endl;
+                    if(esta_repetido == false){
+                	numeros[j] = tamanho[sorteado];
+                	tamanho.erase(tamanho.begin() + sorteado);
+            	}
+        	}
 
-    }
+        	sort(numeros.begin(), numeros.end());
 
+        	for(int i = 0 ;  i < numeros.size() ; i++){
+            	cout << numeros[i] << " ";
+        	}
 
-    void apostas(int numero_ap, double valor_ap){
+        	cout <<endl <<endl;
+        	numeros.clear();
+     	}
 
-              for(int i = 1 ; i < numero_ap + 1 ; i++){
-                cout <<endl;
-                cout << "Sua " <<i <<"º aposta custou R$" << valor_ap <<endl;
-                cout << "---------------------------------*" <<endl;
-            }
+     	cout<< "----------------------------------" <<endl;
 
-        }
+	}
+   }
+
+	void apostas(int numero_ap, double valor_ap){
+
+        	for(int i = 1 ; i < numero_ap + 1 ; i++){
+            	cout <<endl;
+            	cout << "Sua " <<i <<"º aposta custou R$" << valor_ap <<endl;
+            	cout << "---------------------------------*" <<endl;
+        	}
+
+    	}
 
 
 
 int main(){
-      setlocale(LC_ALL, "Portuguese");
+  	setlocale(LC_ALL, "Portuguese");
 
-    vector <int> numcerto;
+	vector <int> numcerto;
 
-    int jogoloteria;
-    int quantidadeAposta;
-    int num_apostas;
-    int quantia_dezenas;
-    double valor_aposta;
+	int jogoloteria;
+	int quantidadeAposta;
+	int num_apostas;
+	int quantia_dezenas;
+	double valor_aposta;
 
 
-    string tipodejogo;
+	string tipodejogo;
 
-        cout << "  Qual jogo você deseja fazer?" <<endl;
-        cout << "-------------------------------" <<endl;
-        cout << "-      Mega-Sena - Digite *1* -" <<endl;
-        cout << "-      Quina     - Digite *2* -" <<endl;
-        cout << "-      Lotomania - Digite *3* -" <<endl;
-        cout << "-      Lotofácil - Digite *4* -" <<endl;
-        cout << "-------------------------------" <<endl <<endl;
-        cout << "Digite: ";
+    	cout << "  Qual jogo você deseja fazer?" <<endl;
+    	cout << "-------------------------------" <<endl;
+    	cout << "-  	Mega-Sena - Digite *1* -" <<endl;
+    	cout << "-  	Quina 	- Digite *2* -" <<endl;
+    	cout << "-  	Lotomania - Digite *3* -" <<endl;
+    	cout << "-  	Lotofácil - Digite *4* -" <<endl;
+    	cout << "-------------------------------" <<endl <<endl;
+    	cout << "Digite: ";
 
-        cin >> jogoloteria;
+    	cin >> jogoloteria;
 
-        switch(jogoloteria){
+    	switch(jogoloteria){
 
 
-        case 1:
+    	case 1:
 
-            cout << fixed <<setprecision(2);
-            tipodejogo = "Mega-Sena";
+        	cout << fixed <<setprecision(2);
+        	tipodejogo = "Mega-Sena";
 
-            cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+        	cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
 
-        do{
-            cout << "Quantas apostas você deseja fazer?" <<endl;
-            cin >> num_apostas;
+    	do{
+        	cout << "Quantas apostas você deseja fazer?" <<endl;
+        	cin >> num_apostas;
 
-        }while(num_apostas <= 0);
+    	}while(num_apostas <= 0);
 
 
-            do{
-            cout << "Quantas dezenas você deseja jogar? (mínimo 6 - máximo 15" <<endl;
-            cin >> quantia_dezenas;
+        	do{
+        	cout << "Quantas dezenas você deseja jogar? (mínimo 6 - máximo 15" <<endl;
+        	cin >> quantia_dezenas;
 
-            }while(quantia_dezenas < 6 || quantia_dezenas >15);
+        	}while(quantia_dezenas < 6 || quantia_dezenas >15);
 
-            if(quantia_dezenas == 6){
-                valor_aposta = 3.50  ;
-            }
+        	if(quantia_dezenas == 6){
+            	valor_aposta = 3.50  ;
+        	}
 
-            else if(quantia_dezenas == 7){
-                valor_aposta = 24.50  ;
-            }
+        	else if(quantia_dezenas == 7){
+            	valor_aposta = 24.50  ;
+        	}
 
-            else if(quantia_dezenas == 8){
-                valor_aposta = 98.00  ;
-            }
+        	else if(quantia_dezenas == 8){
+            	valor_aposta = 98.00  ;
+        	}
 
-            else if(quantia_dezenas == 9){
-                valor_aposta =  294.00 ;
-            }
+        	else if(quantia_dezenas == 9){
+            	valor_aposta =  294.00 ;
+        	}
 
-            else if(quantia_dezenas == 10){
-                valor_aposta = 735.00  ;
-            }
+        	else if(quantia_dezenas == 10){
+            	valor_aposta = 735.00  ;
+        	}
 
-            else if(quantia_dezenas == 11){
-                valor_aposta = 1.617,00  ;
-            }
+        	else if(quantia_dezenas == 11){
+            	valor_aposta = 1.617,00  ;
+        	}
 
-            else if(quantia_dezenas == 12){
-                valor_aposta = 3.234,00  ;
-            }
+        	else if(quantia_dezenas == 12){
+            	valor_aposta = 3.234,00  ;
+        	}
 
-            else if(quantia_dezenas == 13){
-                 cout << fixed <<setprecision(5);
-                valor_aposta = 6.006,00 ;
-            }
+        	else if(quantia_dezenas == 13){
+             	cout << fixed <<setprecision(5);
+            	valor_aposta = 6.006,00 ;
+        	}
 
-            else if(quantia_dezenas == 14){
-                 cout << fixed <<setprecision(3);
-                valor_aposta = 10.510,50  ;
-            }
+        	else if(quantia_dezenas == 14){
+             	cout << fixed <<setprecision(3);
+            	valor_aposta = 10.510,50  ;
+        	}
 
-            if(quantia_dezenas == 15){
-                    cout << fixed <<setprecision(3);
-                valor_aposta = 17.517,50  ;
-            }
+        	if(quantia_dezenas == 15){
+                	cout << fixed <<setprecision(3);
+            	valor_aposta = 17.517,50  ;
+        	}
 
 
-         gerador(num_apostas, quantia_dezenas, 60);
+     	gerador(num_apostas, quantia_dezenas, 60);
 
-         apostas(num_apostas, valor_aposta);
+     	apostas(num_apostas, valor_aposta);
 
-        break;
+    	break;
 
 
 
 
-        case 2:
-             cout << fixed <<setprecision(2);
-            tipodejogo = "Quina";
-                cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+    	case 2:
+         	cout << fixed <<setprecision(2);
+        	tipodejogo = "Quina";
+            	cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
 
-        do{
-            cout << "Quantas apostas você deseja fazer?" <<endl;
-            cin >> num_apostas;
+    	do{
+        	cout << "Quantas apostas você deseja fazer?" <<endl;
+        	cin >> num_apostas;
 
-        }while(num_apostas <= 0);
-                while(quantia_dezenas < 5 || quantia_dezenas > 15){
-            cout << "Quantas dezenas você deseja jogar? (mínimo 5 - máximo 15)" <<endl;
-            cin >> quantia_dezenas;
-            cout << endl;
+    	}while(num_apostas <= 0);
+            	while(quantia_dezenas < 5 || quantia_dezenas > 15){
+        	cout << "Quantas dezenas você deseja jogar? (mínimo 5 - máximo 15)" <<endl;
+        	cin >> quantia_dezenas;
+        	cout << endl;
 
-        }
+    	}
 
 
-        if(quantia_dezenas == 5){
-            valor_aposta = 1.50;
-        }
-        else if(quantia_dezenas == 6){
-            valor_aposta = 9.00;
-        }
+    	if(quantia_dezenas == 5){
+        	valor_aposta = 1.50;
+    	}
+    	else if(quantia_dezenas == 6){
+        	valor_aposta = 9.00;
+    	}
 
-        else if(quantia_dezenas == 7){
-            valor_aposta = 31.50;
-        }
+    	else if(quantia_dezenas == 7){
+        	valor_aposta = 31.50;
+    	}
 
-        else if(quantia_dezenas == 8){
-            valor_aposta = 84.00;
-        }
+    	else if(quantia_dezenas == 8){
+        	valor_aposta = 84.00;
+    	}
 
-        else if(quantia_dezenas == 9){
-            valor_aposta = 189.00;
-        }
+    	else if(quantia_dezenas == 9){
+        	valor_aposta = 189.00;
+    	}
 
-        else if(quantia_dezenas == 10){
-            valor_aposta = 378.00;
-        }
+    	else if(quantia_dezenas == 10){
+        	valor_aposta = 378.00;
+    	}
 
-        else if(quantia_dezenas == 11){
-            valor_aposta = 693.00;
-        }
+    	else if(quantia_dezenas == 11){
+        	valor_aposta = 693.00;
+    	}
 
-        else if(quantia_dezenas == 12){
-             cout << fixed <<setprecision(3);
-            valor_aposta = 1.188,00;
-        }
+    	else if(quantia_dezenas == 12){
+         	cout << fixed <<setprecision(3);
+        	valor_aposta = 1.188,00;
+    	}
 
-        else if(quantia_dezenas == 13){
-             cout << fixed <<setprecision(3);
-            valor_aposta = 1.930,50;
-        }
+    	else if(quantia_dezenas == 13){
+         	cout << fixed <<setprecision(3);
+        	valor_aposta = 1.930,50;
+    	}
 
-         else if(quantia_dezenas == 14){
-                cout << fixed <<setprecision(3);
-            valor_aposta = 3.003,00;
-        }
+     	else if(quantia_dezenas == 14){
+            	cout << fixed <<setprecision(3);
+        	valor_aposta = 3.003,00;
+    	}
 
-         if (quantia_dezenas == 15){
-                cout << fixed <<setprecision(3);
-            valor_aposta = 4.504,50;
-        }
+     	if (quantia_dezenas == 15){
+            	cout << fixed <<setprecision(3);
+        	valor_aposta = 4.504,50;
+    	}
 
 
-         gerador(num_apostas, quantia_dezenas, 80);
+     	gerador(num_apostas, quantia_dezenas, 80);
 
-         apostas(num_apostas, valor_aposta);
+     	apostas(num_apostas, valor_aposta);
 
 
-        break;
+    	break;
 
 
-        case 3:
-            tipodejogo = "Lotomania";
-            cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+    	case 3:
+        	tipodejogo = "Lotomania";
+        	cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
 
-        do{
-            cout << "Quantas apostas você deseja fazer?" <<endl;
-            cin >> num_apostas;
-        }while(num_apostas < 1);
-            quantia_dezenas = 50;
-            valor_aposta = 1.50;
+    	do{
+        	cout << "Quantas apostas você deseja fazer?" <<endl;
+        	cin >> num_apostas;
+    	}while(num_apostas < 1);
+        	quantia_dezenas = 50;
+        	valor_aposta = 1.50;
 
 
-             gerador(num_apostas, quantia_dezenas, 100);
+         	gerador(num_apostas, quantia_dezenas, 100);
 
-             apostas(num_apostas, valor_aposta);
+         	apostas(num_apostas, valor_aposta);
 
-        break;
+    	break;
 
 
 
-        case 4:
-            cout << fixed <<setprecision(2);
-            tipodejogo = "Lotofácil";
-            cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
+    	case 4:
+        	cout << fixed <<setprecision(2);
+        	tipodejogo = "Lotofácil";
+        	cout << "Você escolheu a " <<tipodejogo <<"!" <<endl;
 
-        do{
-            cout << "Quantas apostas você deseja fazer?" <<endl;
-            cin >> num_apostas;
-        }while(num_apostas < 1);
+    	do{
+        	cout << "Quantas apostas você deseja fazer?" <<endl;
+        	cin >> num_apostas;
+    	}while(num_apostas < 1);
 
-         do{
-            cout << "Quantas dezenas você deseja jogar? (mínimo 15 - máximo 18" <<endl;
-            cin >> quantia_dezenas;
+     	do{
+        	cout << "Quantas dezenas você deseja jogar? (mínimo 15 - máximo 18" <<endl;
+        	cin >> quantia_dezenas;
 
-            }while(quantia_dezenas < 15 || quantia_dezenas >18);
+        	}while(quantia_dezenas < 15 || quantia_dezenas >18);
 
 
-            if(quantia_dezenas == 15){
-                valor_aposta = 2,00  ;
-            }
+        	if(quantia_dezenas == 15){
+            	valor_aposta = 2,00  ;
+        	}
 
-            else if(quantia_dezenas == 16){
-                valor_aposta = 32,00  ;
-            }
+        	else if(quantia_dezenas == 16){
+            	valor_aposta = 32,00  ;
+        	}
 
-            else if(quantia_dezenas == 17){
-                valor_aposta = 272,00  ;
-            }
+        	else if(quantia_dezenas == 17){
+            	valor_aposta = 272,00  ;
+        	}
 
-             if(quantia_dezenas == 18){
-                cout << fixed <<setprecision(3);
-                valor_aposta = 1.632,00  ;
-            }
+         	if(quantia_dezenas == 18){
+            	cout << fixed <<setprecision(3);
+            	valor_aposta = 1.632,00  ;
+        	}
 
 
-         gerador(num_apostas, quantia_dezenas, 25);
+     	gerador(num_apostas, quantia_dezenas, 25);
 
-         apostas(num_apostas, valor_aposta);
+     	apostas(num_apostas, valor_aposta);
 
-        break;
-    }
+    	break;
+	}
 
 
 return 0;
 }
+
+
 
 
