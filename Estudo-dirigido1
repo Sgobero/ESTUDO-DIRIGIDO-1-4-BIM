@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<vector>
 #include <locale.h>
@@ -10,60 +11,53 @@
 
 using namespace std;
 
-
    void gerador(int apostas, int dezenas, int quan_numeros){
 
 
-        int det = quan_numeros;
     	vector <int> numeros;
     	int sorteado;
-    	bool esta_repetido = false;
+        bool nao_repetido = true;
+        vector <int> sorteados;
 
     	srand(time( NULL));
     	vector <int> tamanho;
 
-
-    	for(int a = 0; a < det; a++ ){
-            tamanho[a] = a;
-    	}
-
+        for( int a = 1 ; a < apostas + 1 ; a++){
+            cout << endl;
+                cout << "Sua " <<a << "ª aposta teve os seguintes numeros: " <<endl;
 
 
-     	for(int i = 1 ; i < apostas + 1 ; i++){
+        while(numeros.size() < dezenas){
+            int sorteado;
+            sorteado = rand() % quan_numeros + 1;
 
-        	cout <<endl;
-        	cout << "===============================================" <<endl;
-        	cout << "Sua " <<i <<"º aposta teve os seguintes números: " <<endl <<endl;
+             for (int i = 0 ; i < numeros.size() ; i++) {
 
-        	while(numeros.size() < dezenas){
+            if (sorteado == numeros[i]){
+                nao_repetido = false;
+                break;
+            }
+        }
 
-            	sorteado = (rand() % quan_numeros + 1);
+        if (nao_repetido == true){
+            numeros.push_back(sorteado);
+        }
+        else {
+            nao_repetido = true;
+        }
 
-            	for(int j = 0; j < numeros.size(); j++ ){
 
-                	if(sorteado == numeros[j]){
-                    	esta_repetido  = true;
-                }
+        }
+        sort(numeros.begin() , numeros.end());
+        cout << endl;
 
-                    if(esta_repetido == false){
-                	numeros[j] = tamanho[sorteado];
-                	tamanho.erase(tamanho.begin() + sorteado);
-            	}
-        	}
+            for(int j = 0 ; j < numeros.size() ; j++){
+            cout << numeros[j] << " ";
+        }
+            cout << endl;
 
-        	sort(numeros.begin(), numeros.end());
-
-        	for(int i = 0 ;  i < numeros.size() ; i++){
-            	cout << numeros[i] << " ";
-        	}
-
-        	cout <<endl <<endl;
-        	numeros.clear();
-     	}
-
-     	cout<< "----------------------------------" <<endl;
-
-	}
+        numeros.clear();
+        }
    }
 
 	void apostas(int numero_ap, double valor_ap){
@@ -169,10 +163,11 @@ int main(){
             	valor_aposta = 17.517,50  ;
         	}
 
-
      	gerador(num_apostas, quantia_dezenas, 60);
 
-     	apostas(num_apostas, valor_aposta);
+        apostas(num_apostas, valor_aposta);
+
+
 
     	break;
 
@@ -318,7 +313,5 @@ int main(){
 
 return 0;
 }
-
-
 
 
