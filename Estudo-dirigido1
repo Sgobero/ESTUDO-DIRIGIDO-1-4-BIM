@@ -23,7 +23,8 @@ using namespace std;
     	vector <int> tamanho;
 
         for( int a = 1 ; a < apostas + 1 ; a++){
-            cout << endl;
+            cout << endl <<endl;
+            cout << "---------------------------------*" <<endl;
                 cout << "Sua " <<a << "ª aposta teve os seguintes numeros: " <<endl;
 
 
@@ -49,12 +50,12 @@ using namespace std;
 
         }
         sort(numeros.begin() , numeros.end());
-        cout << endl;
 
             for(int j = 0 ; j < numeros.size() ; j++){
             cout << numeros[j] << " ";
         }
-            cout << endl;
+            cout <<endl;
+            	cout << "---------------------------------*" <<endl;
 
         numeros.clear();
         }
@@ -62,6 +63,7 @@ using namespace std;
 
 	void apostas(int numero_ap, double valor_ap){
 
+            cout <<endl;
         	for(int i = 1 ; i < numero_ap + 1 ; i++){
             	cout <<endl;
             	cout << "Sua " <<i <<"º aposta custou R$" << valor_ap <<endl;
@@ -89,7 +91,7 @@ int main(){
     	cout << "  Qual jogo você deseja fazer?" <<endl;
     	cout << "-------------------------------" <<endl;
     	cout << "-  	Mega-Sena - Digite *1* -" <<endl;
-    	cout << "-  	Quina 	- Digite *2* -" <<endl;
+    	cout << "-  	Quina     - Digite *2* -" <<endl;
     	cout << "-  	Lotomania - Digite *3* -" <<endl;
     	cout << "-  	Lotofácil - Digite *4* -" <<endl;
     	cout << "-------------------------------" <<endl <<endl;
@@ -115,7 +117,7 @@ int main(){
 
 
         	do{
-        	cout << "Quantas dezenas você deseja jogar? (mínimo 6 - máximo 15" <<endl;
+        	cout << "Quantas dezenas você deseja jogar? (mínimo 6 - máximo 15)" <<endl;
         	cin >> quantia_dezenas;
 
         	}while(quantia_dezenas < 6 || quantia_dezenas >15);
@@ -279,7 +281,7 @@ int main(){
     	}while(num_apostas < 1);
 
      	do{
-        	cout << "Quantas dezenas você deseja jogar? (mínimo 15 - máximo 18" <<endl;
+        	cout << "Quantas dezenas você deseja jogar? (mínimo 15 - máximo 18)" <<endl;
         	cin >> quantia_dezenas;
 
         	}while(quantia_dezenas < 15 || quantia_dezenas >18);
